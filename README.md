@@ -11,7 +11,7 @@ This project uses AI to generate dynamic NPC dialogues, filter inappropriate con
 ## Installation  
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/AI-NPC-Dialogue.git
+   git clone https://github.com/Alirezasedd/AI-NPC-Dialogue.git
    ```
 2. Navigate to the project folder:
    ```bash
