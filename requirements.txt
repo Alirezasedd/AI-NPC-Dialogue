@@ -1,0 +1,3 @@
+openai
+textblob
+pyttsx3
