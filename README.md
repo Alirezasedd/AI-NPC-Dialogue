@@ -25,6 +25,9 @@ This project uses AI to generate dynamic NPC dialogues, filter inappropriate con
    ```bash
    python npc_dialogue.py
    ```
+## Google Colab Version  
+Run the AI NPC Dialogue project in Google Colab:  
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/11hJWlgkp6HiwQliLCJC7vu0fNGG74yGW)
 
 ## Future Enhancements  
 - Add memory to NPCs so they remember past conversations  
