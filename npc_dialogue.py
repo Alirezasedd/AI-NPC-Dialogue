@@ -1,3 +1,4 @@
+import os
 import openai
 from textblob import TextBlob
 import pyttsx3  # Adding AI voice synthesis
@@ -5,9 +6,7 @@ import re
 
 # OpenAI API Key (replace with your key or use an alternative NLP model)
 OPENAI_API_KEY = "your_api_key_here"
-
-# Initialize text-to-speech engine
-engine = pyttsx3.init()
+openai.api_key = os.getenv("OPENAI_API_KEY", OPENAI_API_KEY)
 
 # Function to generate NPC dialogue using OpenAI GPT
 def generate_npc_dialogue(prompt):
@@ -33,8 +32,10 @@ def filter_dialogue(dialogue):
     :return: Filtered response or original response if no issues detected.
     """
     inappropriate_words = ["violence", "curse", "offensive"]  # Expand as needed
-    if any(word in dialogue.lower() for word in inappropriate_words):
-        return "[Filtered: NPC response contained inappropriate content.]"
+    for word in inappropriate_words:
+        pattern = r"\b{}\b".format(re.escape(word))
+        if re.search(pattern, dialogue, re.IGNORECASE):
+            return "[Filtered: NPC response contained inappropriate content.]"
     return dialogue
 
 # Function to analyze sentiment of dialogue
@@ -56,8 +57,13 @@ def speak_dialogue(dialogue):
     Uses text-to-speech to vocalize the NPC dialogue.
     :param dialogue: AI-generated NPC response.
     """
-    engine.say(dialogue)
-    engine.runAndWait()
+    try:
+        engine = pyttsx3.init()
+        engine.say(dialogue)
+        engine.runAndWait()
+    except Exception:
+        # If text-to-speech backend is not available, fail gracefully
+        pass
 
 # Example Usage
 if __name__ == "__main__":
